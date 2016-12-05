@@ -1,8 +1,8 @@
 #!/bin/bash
 MQTT_IMAGE=advigw4x86/mqtt-bus
 MQTT_CONTAINER=mqtt
-HDD_FAILURE_PREDICT_IMAGE=advigw4x86/hdd-failure-predict
-HDD_FAILURE_PREDICT_CONTAINER=hdd-failure-predict
+DOCKER_API_GW_IMAGE=ivan0124tw/docker_api_gw
+DOCKER_API_GW_CONTAINER=docker_api_gw
 ADVANTECH_NET=advantech-net
 
 
@@ -11,21 +11,21 @@ echo "======================================="
 echo "[Stpe1]: Stop container......"
 echo "======================================="
 sudo docker stop $MQTT_CONTAINER
-sudo docker stop $HDD_FAILURE_PREDICT_CONTAINER
+sudo docker stop $DOCKER_API_GW_CONTAINER
 
 #remove container
 echo "======================================="
 echo "[Step2]: Remove container......"
 echo "======================================="
 sudo docker rm $MQTT_CONTAINER
-sudo docker rm $HDD_FAILURE_PREDICT_CONTAINER
+sudo docker rm $DOCKER_API_GW_CONTAINER
 
 #pull images
 echo "======================================="
 echo "[Step3]: Pull container images......"
 echo "======================================="
 sudo docker pull $MQTT_IMAGE
-sudo docker pull $HDD_FAILURE_PREDICT_IMAGE
+sudo docker pull $DOCKER_API_GW_IMAGE
 
 #create user-defined network `advantech-net`
 NET=`sudo docker network ls | grep $ADVANTECH_NET | awk '{ print $2}'`
@@ -41,5 +41,5 @@ echo "======================================="
 echo "[Step4]: Run container images......"
 echo "======================================="
 sudo docker run --network=$ADVANTECH_NET -itd --name $MQTT_CONTAINER $MQTT_IMAGE
-#sudo docker run --network=$ADVANTECH_NET -it --name $HDD_FAILURE_PREDICT_CONTAINER $HDD_FAILURE_PREDICT_IMAGE
-sudo docker run --network=$ADVANTECH_NET -it --name $HDD_FAILURE_PREDICT_CONTAINER -v $PWD:/home/adv:rw $HDD_FAILURE_PREDICT_IMAGE
+#sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER $DOCKER_API_GW_IMAGE
+sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER -v $PWD/APIGateway:/home/adv/APIGateway:rw -v $PWD/wsn_setting:/home/adv/wsn_setting:rw $DOCKER_API_GW_IMAGE
