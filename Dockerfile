@@ -23,10 +23,14 @@ RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /home/adv
 
 # install APIGateway
-RUN git clone https://github.com/ADVANTECH-Corp/APIGateway.git /home/adv/APIGateway
-RUN cp APIGateway/script/advigw-restapi /usr/local/bin/.
+#RUN git clone https://github.com/ADVANTECH-Corp/APIGateway.git /home/adv/APIGateway
+#RUN cp APIGateway/script/advigw-restapi /usr/local/bin/.
 
 USER adv
+
+#Share folder with host
+RUN mkdir /home/adv/APIGateway
+VOLUME /home/adv/APIGateway
 
 # Run api-gw
 #ENTRYPOINT ["advigw-restapi"]
