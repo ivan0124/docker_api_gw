@@ -35,10 +35,10 @@ VOLUME /home/adv/APIGateway
 RUN mkdir /home/adv/wsn_setting
 VOLUME /home/adv/wsn_setting
 
-RUN mkdir /home/adv/wsn_setting/device_table
+#RUN mkdir /home/adv/wsn_setting/device_table
 #VOLUME /home/adv/wsn_setting/device_table
 
-RUN mkdir /home/adv/wsn_setting/device_html
+#RUN mkdir /home/adv/wsn_setting/device_html
 #VOLUME /home/adv/wsn_setting/device_html
 
 # Run api-gw
