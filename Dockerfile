@@ -36,4 +36,4 @@ RUN mkdir /home/adv/wsn_setting
 VOLUME /home/adv/wsn_setting
 
 # Run api-gw
-#ENTRYPOINT ["advigw-restapi"]
+ENTRYPOINT ["/home/adv/APIGateway/script/init_wsn_setting.sh"]
