@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 #MAINTAINER Advantech
 
@@ -15,9 +15,6 @@ RUN apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
-# Install R environment
-RUN apt-get -y install r-base
-
 # adv account
 RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
 
@@ -26,10 +23,8 @@ RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /home/adv
 
 # install APIGateway
-#RUN git clone https://github.com/ADVANTECH-Corp/APIGateway.git /home/adv/APIGateway
-#RUN cp APIGateway/script/advigw-restapi /usr/local/bin/.
-#RUN echo `date` > 123.txt
-RUN git clone https://github.com/ADVANTECH-Corp/hdd_failure_predict_service.git
+RUN git clone https://github.com/ADVANTECH-Corp/APIGateway.git /home/adv/APIGateway
+RUN cp APIGateway/script/advigw-restapi /usr/local/bin/.
 
 USER adv
 
