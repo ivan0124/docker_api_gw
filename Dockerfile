@@ -32,5 +32,8 @@ USER adv
 RUN mkdir /home/adv/APIGateway
 VOLUME /home/adv/APIGateway
 
+RUN mkdir /home/adv/wsn_setting
+VOLUME /home/adv/wsn_setting
+
 # Run api-gw
 #ENTRYPOINT ["advigw-restapi"]
