@@ -23,11 +23,10 @@ RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /home/adv
 
 # install APIGateway
-#RUN git clone https://github.com/ADVANTECH-Corp/APIGateway.git /home/adv/APIGateway
-#RUN cp APIGateway/script/advigw-restapi /usr/local/bin/.
+RUN git clone https://github.com/ADVANTECH-Corp/APIGateway.git /home/adv/api_gw
+RUN cp api_gw/script/init_wsn_setting.sh /usr/local/bin/.
 
 USER adv
-
 #Share folder with host
 RUN mkdir /home/adv/APIGateway
 VOLUME /home/adv/APIGateway
@@ -35,5 +34,11 @@ VOLUME /home/adv/APIGateway
 RUN mkdir /home/adv/wsn_setting
 VOLUME /home/adv/wsn_setting
 
+#RUN mkdir /home/adv/wsn_setting/device_table
+#VOLUME /home/adv/wsn_setting/device_table
+
+#RUN mkdir /home/adv/wsn_setting/device_html
+#VOLUME /home/adv/wsn_setting/device_html
+
 # Run api-gw
-#ENTRYPOINT ["advigw-restapi"]
+ENTRYPOINT ["init_wsn_setting.sh"]
