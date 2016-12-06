@@ -21,11 +21,17 @@ sudo docker rm $MQTT_CONTAINER
 sudo docker rm $DOCKER_API_GW_CONTAINER
 
 #pull images
+if [ "$1" == "restart" ] ; then
+echo "======================================="
+echo "[Step3]: Restart, don't pull container images......"
+echo "======================================="
+else 
 echo "======================================="
 echo "[Step3]: Pull container images......"
 echo "======================================="
-#sudo docker pull $MQTT_IMAGE
+sudo docker pull $MQTT_IMAGE
 sudo docker pull $DOCKER_API_GW_IMAGE
+fi
 
 #create user-defined network `advantech-net`
 NET=`sudo docker network ls | grep $ADVANTECH_NET | awk '{ print $2}'`
