@@ -24,7 +24,7 @@ sudo docker rm $DOCKER_API_GW_CONTAINER
 echo "======================================="
 echo "[Step3]: Pull container images......"
 echo "======================================="
-sudo docker pull $MQTT_IMAGE
+#sudo docker pull $MQTT_IMAGE
 sudo docker pull $DOCKER_API_GW_IMAGE
 
 #create user-defined network `advantech-net`
