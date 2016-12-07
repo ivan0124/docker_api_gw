@@ -48,4 +48,4 @@ echo "[Step4]: Run container images......"
 echo "======================================="
 sudo docker run --network=$ADVANTECH_NET -itd --name $MQTT_CONTAINER $MQTT_IMAGE
 #sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER $DOCKER_API_GW_IMAGE
-sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER -v $PWD/APIGateway:/home/adv/APIGateway:rw -v /usr/share/webmin/wsn_setting:/home/adv/wsn_setting:rw $DOCKER_API_GW_IMAGE
+sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER -v $PWD/APIGateway:/home/adv/APIGateway:rw -v /usr/share/webmin/wsn_setting:/home/adv/wsn_setting:rw -p 3000:3000 $DOCKER_API_GW_IMAGE
