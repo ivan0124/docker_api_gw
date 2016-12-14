@@ -46,10 +46,44 @@ echo "[Step4]: Found $ADVANTECH_NET network. $ADVANTECH_NET exist."
 echo "======================================="
 fi
 
+
+if [ "$1" != "restart" ] ; then
+echo "======================================="
+echo "[Step5]: Setup Webmin Advantech WSN plugin folder......"
+echo "======================================="
+sudo rm -rf /usr/share/webmin/wsn_setting
+sudo mkdir -p /usr/share/webmin/wsn_setting
+sudo chmod a+rwx -R /usr/share/webmin/wsn_setting
+sudo chmod a+rw /etc/webmin/webmin.acl
+WSN_SETTING=`cat /etc/webmin/webmin.acl | grep wsn_setting`
+if [ "$WSN_SETTING" == "" ] ; then
+echo "wsn_setting is null"
+echo "root: wsn_setting" >> /etc/webmin/webmin.acl
+fi
+
+else
+echo "======================================="
+echo "[Step5]: Restart. Don't Setup Webmin Advantech WSN plugin folder......"
+echo "======================================="
+
+fi
+
 #run container and join to `advantech-net` network
 echo "======================================="
-echo "[Step5]: Run container images......"
+echo "[Step6]: Run container images......"
 echo "======================================="
 sudo docker run --network=$ADVANTECH_NET -itd --name $MQTT_CONTAINER -p 1883:1883 $MQTT_IMAGE
 #sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER $DOCKER_API_GW_IMAGE
-sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER -v $PWD/APIGateway:/home/adv/APIGateway:rw -v /usr/share/webmin/wsn_setting:/home/adv/wsn_setting:rw -p 3000:3000 $DOCKER_API_GW_IMAGE
+sudo docker run --network=$ADVANTECH_NET -itd --name $DOCKER_API_GW_CONTAINER -v $PWD/APIGateway:/home/adv/APIGateway:rw -v /usr/share/webmin/wsn_setting:/home/adv/wsn_setting:rw -p 3000:3000 $DOCKER_API_GW_IMAGE
+
+
+if [ "$1" != "restart" ] ; then
+echo "======================================="
+echo "[Step7]: Clear Webmin module cache......"
+echo "======================================="
+sudo rm -rf /var/webmin/module.infos.cache
+else
+echo "======================================="
+echo "[Step7]: Restart. Don't Clear Webmin module cache......"
+echo "======================================="
+fi
