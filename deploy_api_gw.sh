@@ -48,7 +48,7 @@ fi
 
 #run container and join to `advantech-net` network
 echo "======================================="
-echo "[Step4]: Run container images......"
+echo "[Step5]: Run container images......"
 echo "======================================="
 sudo docker run --network=$ADVANTECH_NET -itd --name $MQTT_CONTAINER -p 1883:1883 $MQTT_IMAGE
 #sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER $DOCKER_API_GW_IMAGE
