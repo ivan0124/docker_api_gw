@@ -4,11 +4,12 @@ MQTT_CONTAINER=mqtt
 DOCKER_API_GW_IMAGE=ivan0124tw/docker_api_gw
 DOCKER_API_GW_CONTAINER=docker_api_gw
 ADVANTECH_NET=advigw_network
+WSN_SETTING_FOLDER=advan_wsn_setting
 
 
 #stop container
 echo "======================================="
-echo "[Stpe1]: Stop container......"
+echo "[Step1]: Stop container......"
 echo "======================================="
 sudo docker stop $MQTT_CONTAINER
 sudo docker stop $DOCKER_API_GW_CONTAINER
@@ -51,14 +52,14 @@ if [ "$1" != "restart" ] ; then
 echo "======================================="
 echo "[Step5]: Setup Webmin Advantech WSN plugin folder......"
 echo "======================================="
-sudo rm -rf /usr/share/webmin/wsn_setting
-sudo mkdir -p /usr/share/webmin/wsn_setting
-sudo chmod a+rwx -R /usr/share/webmin/wsn_setting
+sudo rm -rf /usr/share/webmin/$WSN_SETTING_FOLDER
+sudo mkdir -p /usr/share/webmin/$WSN_SETTING_FOLDER
+sudo chmod a+rwx -R /usr/share/webmin/$WSN_SETTING_FOLDER
 sudo chmod a+rw /etc/webmin/webmin.acl
-WSN_SETTING=`cat /etc/webmin/webmin.acl | grep wsn_setting`
-if [ "$WSN_SETTING" == "" ] ; then
-echo "wsn_setting is null"
-echo "root: wsn_setting" >> /etc/webmin/webmin.acl
+WSN_SETTING_ACL=`cat /etc/webmin/webmin.acl | grep $WSN_SETTING_FOLDER`
+if [ "$WSN_SETTING_ACL" == "" ] ; then
+echo "wsn_setting ACL is null"
+echo "root: $WSN_SETTING_FOLDER" >> /etc/webmin/webmin.acl
 fi
 
 else
@@ -74,7 +75,7 @@ echo "[Step6]: Run container images......"
 echo "======================================="
 sudo docker run --network=$ADVANTECH_NET -itd --name $MQTT_CONTAINER -p 1883:1883 $MQTT_IMAGE
 #sudo docker run --network=$ADVANTECH_NET -it --name $DOCKER_API_GW_CONTAINER $DOCKER_API_GW_IMAGE
-sudo docker run --network=$ADVANTECH_NET -itd --name $DOCKER_API_GW_CONTAINER -v $PWD/APIGateway:/home/adv/APIGateway:rw -v /usr/share/webmin/wsn_setting:/home/adv/wsn_setting:rw -p 3000:3000 $DOCKER_API_GW_IMAGE
+sudo docker run --network=$ADVANTECH_NET -itd --name $DOCKER_API_GW_CONTAINER -v $PWD/APIGateway:/home/adv/APIGateway:rw -v /usr/share/webmin/$WSN_SETTING_FOLDER:/home/adv/wsn_setting:rw -p 3000:3000 $DOCKER_API_GW_IMAGE
 
 
 if [ "$1" != "restart" ] ; then
