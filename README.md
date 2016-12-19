@@ -3,14 +3,21 @@ Step1. clone project
 <pre>
 $ git clone https://github.com/ivan0124/docker_api_gw.git
 </pre>
-Step2. launch `deploy_api_gw.sh` to download and run docker images (`mqtt` and `APIGateway`).
+
+Step2. enter `docker_api_gw` directory and clone APIGateway source code
+<pre>
+$ cd docker_api_gw
+$ git clone https://github.com/ADVANTECH-Corp/APIGateway.git
+</pre>
+
+Step3. launch `deploy_api_gw.sh` to download and run docker images (`mqtt` and `APIGateway`).
 
 ex: Host PC IP address: `192.168.0.1`
 <pre>
 $ deploy_api_gw.sh
 </pre>
 
-Step3. use `WiseSnail` connect to `APIGateway` (mqtt's IP address is Step2 host IP address)
+Step4. use `WiseSnail` connect to `APIGateway` (mqtt's IP address is Step2 host IP address)
 
 ex: connect to Mqtt , IP address is `192.168.0.1`
 
