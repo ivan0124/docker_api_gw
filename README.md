@@ -6,6 +6,9 @@ $ git clone https://github.com/ivan0124/docker_api_gw.git
 Step2. launch `deploy_api_gw.sh` to download and run docker images (`mqtt` and `APIGateway`).
 
 ex: Host PC IP address: `192.168.0.1`
+<pre>
+$ deploy_api_gw.sh
+</pre>
 
 Step3. use `WiseSnail` connect to `APIGateway` (mqtt's IP address is Step2 host IP address)
 
