@@ -21,6 +21,8 @@ Step4. use `WiseSnail` connect to `APIGateway` (mqtt's IP address is Step2 host 
 
 ex: connect to Mqtt , IP address is `192.168.0.1`
 
+Step5. login to  `Webmin` server and use GET/PUT RESTful API
+
 
 # How to develope and update APIGateway
 Step1. enter `docker_api_gw` directory and clone APIGateway source code
