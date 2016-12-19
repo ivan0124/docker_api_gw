@@ -15,13 +15,19 @@ Step3. use `WiseSnail` connect to `APIGateway` (mqtt's IP address is Step2 host 
 ex: connect to Mqtt , IP address is `192.168.0.1`
 
 
-# How to debug
-Step1. edit `deploy_api_gw.sh` and change parameter `-itd` to `-it`.
+# How to develope and update APIGateway
+Step1. enter `docker_api_gw` directory and clone APIGateway source code
+<pre>
+$ cd docker_api_gw
+$ git clone https://github.com/ADVANTECH-Corp/APIGateway.git
+</pre>
+
+Step2. edit `deploy_api_gw.sh` and change parameter `-itd` to `-it`.
 <pre>
 sudo docker run --network=$ADVANTECH_NET -itd --name $DOCKER_API_GW_CONTAINER -v $PWD/APIGateway:/home/adv/APIGateway:rw -v /usr/share/webmin/$WSN_SETTING_FOLDER:/home/adv/wsn_setting:rw -p 3000:3000 $DOCKER_API_GW_IMAGE
 </pre>
 
-Step2. re-run docker container.
+Step3. re-run docker container.
 <pre>
 $ deploy_api_gw.sh restart
 </pre>
