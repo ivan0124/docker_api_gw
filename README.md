@@ -10,7 +10,7 @@ $ cd docker_api_gw
 $ git clone https://github.com/ADVANTECH-Corp/APIGateway.git
 </pre>
 
-Step3. enter 'docker_api_gw/APIGateway/apps/wsn_manage' to edit 'wisesnail_msgmgr.js' like below
+Step3. enter `docker_api_gw/APIGateway/apps/wsn_manage` to edit `wisesnail_msgmgr.js` like below
 <pre>
 //var Client  = Mqtt.connect('mqtt://advigw-mqtt-bus');
 var Client  = Mqtt.connect('mqtt://mqtt.advigw_network');
