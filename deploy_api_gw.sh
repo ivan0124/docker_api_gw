@@ -1,7 +1,7 @@
 #!/bin/bash
 MQTT_IMAGE=advigw4x86/mqtt-bus
 MQTT_CONTAINER=mqtt
-DOCKER_API_GW_IMAGE=ivan0124tw/docker_api_gw
+DOCKER_API_GW_IMAGE=ivan0124tw/docker_api_gw:v0.0.1
 DOCKER_API_GW_CONTAINER=docker_api_gw
 ADVANTECH_NET=advigw_network
 WSN_SETTING_FOLDER=advan_wsn_setting
