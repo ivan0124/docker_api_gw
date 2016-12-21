@@ -10,18 +10,24 @@ $ cd docker_api_gw
 $ git clone https://github.com/ADVANTECH-Corp/APIGateway.git
 </pre>
 
-Step3. launch `deploy_api_gw.sh` to download and run docker images (`mqtt` and `APIGateway`).
+Step3. enter 'docker_api_gw/APIGateway/apps/wsn_manage' to edit 'wisesnail_msgmgr.js' like below
+<pre>
+//var Client  = Mqtt.connect('mqtt://advigw-mqtt-bus');
+var Client  = Mqtt.connect('mqtt://mqtt.advigw_network');
+</pre>
+
+Step4. launch `deploy_api_gw.sh` to download and run docker images (`mqtt` and `APIGateway`).
 
 ex: Host PC IP address: `192.168.0.1`
 <pre>
 $ deploy_api_gw.sh
 </pre>
 
-Step4. use `WiseSnail` connect to `APIGateway` (mqtt's IP address is Step2 host IP address)
+Step5. use `WiseSnail` connect to `APIGateway` (mqtt's IP address is Step2 host IP address)
 
 ex: connect to Mqtt , IP address is `192.168.0.1`
 
-Step5. login to  `Webmin` server and use GET/PUT RESTful API
+Step6. login to  `Webmin` server and use GET/PUT RESTful API
 
 
 # How to develope and update APIGateway
